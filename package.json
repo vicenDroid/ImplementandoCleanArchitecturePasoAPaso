@@ -1,0 +1,24 @@
+{
+  "name": "clean-orders-ts",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/shared/main.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/main.js",
+    "test:watch": "vitest",
+    "test": "node --test --experimental-strip-types tests/**/*.test.ts"
+  },
+  "dependencies": {
+    "fastify": "^4.28.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "eslint": "^9.0.0",
+    "tsx": "^4.15.7",
+    "typescript": "^5.5.0",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^2.0.0",
+    "zod": "3.23.8"
+  }
+}
