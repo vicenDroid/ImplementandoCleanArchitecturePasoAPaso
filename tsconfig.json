@@ -30,6 +30,6 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true
   },
-  "include": ["src/**/*.ts", "main.ts"],
+  "include": ["src/**/*.ts", "main.ts", "test/**/*"],
   "exclude": ["node_modules","dist","tests"]
 }
