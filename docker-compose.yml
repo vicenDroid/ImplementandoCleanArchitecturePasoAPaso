@@ -1,0 +1,34 @@
+# Especifica la versión del motor de Docker Compose que se va a utilizar
+version: '3.8'
+
+# Aquí definimos el listado de contenedores o servicios que queremos levantar
+services:
+
+  # Nombre de nuestro servicio (coincide con "postgress" en tus scripts de npm)
+  postgress:
+    # Descarga la imagen oficial de PostgreSQL versión 16 usando Linux Alpine (ultraligera)
+    image: postgres:16-alpine
+    
+    # Nombre personalizado que aparecerá en tu aplicación Docker Desktop
+    container_name: clean-architecture-postgres
+    
+    # Política de reinicio: si el contenedor se cae por un error, Docker lo levanta solo
+    restart: always
+    
+    # Variables de entorno internas que configuran las credenciales iniciales de Postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: orders
+      
+    # Mapeo de puertos: conecta el puerto 5432 de tu ordenador con el 5432 del contenedor
+    ports:
+      - "5432:5432"
+      
+    # Conecta una carpeta interna del contenedor con un disco virtual creado por Docker
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+# Definición del disco virtual independiente para que los datos no se borren al apagar el contenedor
+volumes:
+  postgres_data:

@@ -2,7 +2,14 @@
   "name": "clean-orders-ts",
   "version": "0.1.0",
   "type": "module",
+  "//1": "pg para postGress; pino para logger; pino-pretty para los log de consola;",
+    "//2": "dotenv para las variables de entorno, zod para validacion de las variables de entorno",
+    "//3": "scripts para levantar la BBDD, apagarla, conectarla, hacer migraciones, borrarlas, crear, etc",
   "scripts": {
+    "db:up": "docker compose up -d postgress",
+    "db:down": "docker compose down",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "worker:outbox": "tsx src/infrastructure/messaging/outbox-dispatcher.ts",
     "dev": "tsx src/shared/main.ts",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/main.js",
@@ -10,19 +17,19 @@
     "test": "node --test --experimental-strip-types tests/**/*.test.ts"
   },
   "dependencies": {
-    "fastify": "^4.28.1"
-  },
-  "devDependencies": {
-    "@types/node": "^22.0.0",
-    "dotenv": "^16.4.5",
-    "eslint": "^9.0.0",
+    "fastify": "^4.28.1",
     "pg": "^8.12.0",
     "pino": "^9.0.0",
     "pino-pretty": "^11.2.2",
+    "dotenv": "^16.4.5",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/pg":"8.10.2",    
+    "eslint": "^9.0.0",    
     "tsx": "^4.15.7",
-    "typescript": "^5.5.0",
-    "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "^2.1.9",
-    "zod": "3.23.8"
+    "typescript": "^5.5.0",    
+    "vitest": "^2.0.0"
   }
 }
