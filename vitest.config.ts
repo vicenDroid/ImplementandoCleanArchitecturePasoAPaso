@@ -11,7 +11,7 @@ const __dirname = dirname(__filename);
 
 export default defineConfig({
     test: {
-        include: ['tests/**/*.spec.ts', 'src/**/*.spec.ts', 
+        include: ['test/**/*.spec.ts', 'src/**/*.spec.ts', 
             'src/test/**/*.spec.ts', 'test/**/*.spec.ts'],
         //environment: 'node',
         globals: true,

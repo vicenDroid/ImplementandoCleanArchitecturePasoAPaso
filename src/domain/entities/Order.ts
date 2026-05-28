@@ -8,6 +8,8 @@ import { Quantity } from '../value-objects/Quantity.js';
 import { DomainEvent } from '../events/DomainEvent.js';
 import { OrderCreated } from '../events/OrderCreated.js';
 import { ItemAddedToOrder } from '../events/ItemAddedToOrder.js';
+import { CurrencyMismatchError } from "../errors/CurrencyMismatchError.js";
+
 
 export class OrderItem {
     constructor(
@@ -34,8 +36,10 @@ export class Order {
         const existingItem = this._items.get(productSku.value);
 
         if (existingItem) {
+            // Regla de negocio: Si el producto ya existe, el precio debe ser el mismo
             if (!existingItem.unitPrice.equals(unitPrice)) {
-                throw new Error('Cannot add item with different unit price');
+                throw new CurrencyMismatchError();
+                //throw new Error('Cannot add item with different unit price');
             }
             // Aquí se actualizaría la cantidad si el profesor lo pide más adelante
         } else {
@@ -57,7 +61,6 @@ export class Order {
         for (const item of this._items.values()) {
             const currencyCode = item.unitPrice.currency.code;
             const itemTotal = item.unitPrice.multiply(item.quantity.value);
-
             const currentTotal = totals.get(currencyCode);
             if (currentTotal) {
                 totals.set(currencyCode, currentTotal.add(itemTotal));
@@ -66,5 +69,5 @@ export class Order {
             }
         }
         return totals;
-    }
+    }    
 }
