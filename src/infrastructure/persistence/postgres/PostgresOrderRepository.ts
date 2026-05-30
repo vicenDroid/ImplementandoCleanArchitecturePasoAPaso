@@ -8,6 +8,7 @@ import { Currency } from '../../../domain/value-objects/Currency.js';
 import { Quantity } from '../../../domain/value-objects/Quantity.js';
 import { Result, ok, fail } from '../../../shared/Result.js';
 import { AppError, InfraError, NotFoundError } from '../../../application/errors.js';
+//import { number } from 'zod';
 
 // Modelo de datos exacto que representa una fila de la tabla "orders" en la base de datos
 interface OrderRow {
@@ -112,7 +113,7 @@ export class PostgresOrderRepository implements OrderRepository {
         const productSku = new SKU(itemRow.sku);
         const quantity = new Quantity(itemRow.quantity);
         const currency = new Currency(currencyCode);
-        const unitPrice = new Money(itemRow.unit_price, currency);
+        const unitPrice = new Money(Number(itemRow.unit_price), currency);
         
         // Añade el ítem reconstruido respetando las reglas de negocio del dominio
         order.addItem(productSku, quantity, unitPrice);
