@@ -8,7 +8,6 @@ import { Currency } from '../../../domain/value-objects/Currency.js';
 import { Quantity } from '../../../domain/value-objects/Quantity.js';
 import { Result, ok, fail } from '../../../shared/Result.js';
 import { AppError, InfraError, NotFoundError } from '../../../application/errors.js';
-//import { number } from 'zod';
 
 // Modelo de datos exacto que representa una fila de la tabla "orders" en la base de datos
 interface OrderRow {
